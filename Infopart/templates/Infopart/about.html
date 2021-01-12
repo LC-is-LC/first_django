@@ -1,0 +1,29 @@
+<!-- To inherit the base template -->
+{% extends 'Infopart/base.html'%}
+<style>
+    .purple-ground{
+    background-color : purple;}
+</style>
+
+<!-- #LC to write python codes within this template engine we put the code between curly bracket and percentage but you have to always notify the end -->
+<!-- You also have to put double curly bracket to access variables -->
+{% block content %}
+    <h1 style = ' background-color : #5f788a; color : white'>Our Board of Directors:</h1>
+        {% for director in Board_of_Directors %}
+            <!--    <h1>{{ director.Director }}</h1>
+                <p>the {{ director.Job_description }} of CBA which was launched on {{ director.Launch_date }}</p>
+                <p>{{ director.Get_to_know }}</p> -->
+                <article class="media content-section">
+                <img class="rounded_circle article-img" src="{{ director.referee.profile.image.url}}">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="#">{{ director.department }}</a>
+                    <!-- to filter a datetime settings to only give the date you add '|date:'format character you want'-->
+                  <small class="text-muted">{{ director.hire_date|date:'F d, Y' }}</small>
+                </div>
+                <h2><a class="article-title" href="#">{{ director.director }}</a></h2>
+                <p class="article-content">{{ director.get_to_know }}</p>
+              </div>
+            </article>
+        {% endfor %}
+{% endblock content%}

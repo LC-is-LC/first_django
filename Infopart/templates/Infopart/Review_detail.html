@@ -1,0 +1,23 @@
+{% extends 'Infopart/base.html'%}
+{% block content %}
+                <article class="media content-section">
+                  <img class="rounded_circle article-img" src="{{ object.customer.profile.image.url}}">
+                  <div class="media-body">
+                    <div class="article-metadata">
+                      <h1><a class="article-title" href="{% url 'User-review' object.customer.username %}">{{ object.customer }}</a></h1>
+                      <small >{{ object.intro }}</small>
+                        <!-- to filter a datetime settings to only give the date you add '|date:'format character you want'-->
+                      <small class="text-muted">{{ object.post_date|date:'F d, Y' }}</small>
+                        {% if object.customer == user%}
+                        <div>
+                            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'Review-update' object.id%}">Udpate</a>
+                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'Review-delete' object.id%}">Deletee</a>
+                        </div>
+                        {%endif%}
+                    </div>
+
+                    <p class="article-content">{{ object.comment }}</p>
+                  </div>
+                </article>
+    <a href= "http://localhost:8000/about/">Meet our board of directors</a>
+{% endblock content %}
